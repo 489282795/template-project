@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- 控制台输出配置 -->
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder charset="UTF-8">
+            <Pattern>[%date{yyyy-MM-dd HH:mm:ss}][%-4level][%line][%thread] traceLogid:[%X{traceLogid}] dstTraceId:[%X{dstTraceId}] call[%logger][%method] %msg%n</Pattern>
+        </encoder>
+    </appender>
+
+    <!-- info日志输出配置 -->
+    <appender name="logInfoFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>/data/appLogs/tag-premise-info.log</File>
+        <encoder>
+            <Pattern>[%date{yyyy-MM-dd HH:mm:ss}][%-4level][%line][%thread] traceLogid:[%X{traceLogid}] dstTraceId:[%X{dstTraceId}] call[%logger][%method] %msg%n </Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/data/appLogs/tag-premise-info_%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>512MB</maxFileSize>
+            </TimeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- error日志输出配置 -->
+    <appender name="logErrorFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>/data/appLogs/tag-premise-error.log</File>
+        <encoder>
+            <Pattern>[%date{yyyy-MM-dd HH:mm:ss}][%-4level][%line][%thread] traceLogid:[%X{traceLogid}] dstTraceId:[%X{dstTraceId}] call[%logger][%method] %msg%n </Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/data/appLogs/tag-premise-error_%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>512MB</maxFileSize>
+            </TimeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- 第三方 jar 日志输出配置 -->
+    <logger name="org.springframework.web.servlet.DispatcherServlet" level="debug"/>
+    <logger name="org.springframework.web.context.support.XmlWebApplicationContext" level="debug"/>
+    <logger name="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping" level="debug"/>
+    <logger name="com.alibaba.dubbo.registry.zookeeper.ZookeeperRegistry" level="debug"/>
+    <logger name="com.alibaba.dubbo.config.AbstractConfig" level="debug"></logger>
+    <logger name="org.apache.commons" level="info"/>
+    <logger name="java.sql.Connection" level="DEBUG"/>
+    <logger name="java.sql.Statement" level="info"/>
+    <logger name="java.sql.PreparedStatement" level="info"/>
+
+    <!-- 日志输出适配器配置 -->
+    <root level="info" name="com.cn.template">
+        <appender-ref ref="stdout"/>
+        <appender-ref ref="logInfoFile"/>
+        <appender-ref ref="logErrorFile"/>
+    </root>
+
+</configuration>

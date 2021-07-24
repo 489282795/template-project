@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.template.dao.SystemMenuMapper">
+    <resultMap id="systemMenuBean" type="com.cn.template.common.bean.base.SystemMenuBean">
+        <id column="ID" property="id"/>
+        <result column="MENU_CODE" property="menuCode"/>
+        <result column="PARENT_CODE" property="parentCode"/>
+        <result column="MENU_NAME" property="menuName"/>
+        <result column="MENU_ICON1" property="menuIcon1"/>
+        <result column="MENU_ICON2" property="menuIcon2"/>
+        <result column="MENU_ICON3" property="menuIcon3"/>
+        <result column="MENU_PATH1" property="menuPath1"/>
+        <result column="MENU_PATH2" property="menuPath2"/>
+        <result column="IS_MENU" property="isMenu"/>
+        <result column="IS_DATA_SCOPE" property="isDataScope"/>
+        <result column="SORT" property="sort"/>
+        <result column="SYSTEM_CODE" property="systemCode"/>
+        <result column="SYSTEM_NAME" property="systemName"/>
+        <result column="STAT" property="stat"/>
+        <result column="OPEN_TYPE" property="openType"/>
+        <result column="MENU_TIPS" property="menuTips"/>
+        <result column="MENU_TAG" property="menuTag"/>
+        <result column="OLD_MENU_CODE" property="oldMenuCode"/>
+        <result column="MEMO" property="memo"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID,MENU_CODE,PARENT_CODE,MENU_NAME,MENU_ICON1,MENU_ICON2,MENU_ICON3,MENU_PATH1,MENU_PATH2,IS_MENU,IS_DATA_SCOPE,SORT,SYSTEM_CODE,SYSTEM_NAME,STAT,OPEN_TYPE,MENU_TIPS,MENU_TAG,OLD_MENU_CODE,MEMO
+    </sql>
+
+    <!--获取所有菜单列表-->
+    <select id="getSystemMenu" resultMap="systemMenuBean">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_menu
+        <where>
+            <if test="stat != null and stat != ''">
+                STAT = ${stat}
+            </if>
+            <if test="isMenu != null and isMenu != ''">
+                and IS_MENU = ${isMenu}
+            </if>
+            <if test="menuName != null and menuName != ''">
+                and MENU_NAME like '%${menuName}%'
+            </if>
+        </where>
+    </select>
+
+    <!--根据角色获取菜单列表-->
+    <select id="getSystemMenuByMenuCodes" resultMap="systemMenuBean">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_menu
+        where MENU_CODE IN
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+
+</mapper>

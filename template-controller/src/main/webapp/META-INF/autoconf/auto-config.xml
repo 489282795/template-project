@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+
+    <!--数据连接池配置-->
+    <group name="datasource">
+        <property name="jdbc.driverClassName" defaultValue="oracle.jdbc.driver.OracleDriver"/>
+        <property name="jdbc.url" defaultValue="jdbc:oracle:thin:@172.17.161.10:1521:test"/>
+        <property name="jdbc.username" defaultValue="root"/>
+        <property name="jdbc.password" defaultValue="root"/>
+        <property name="jdbc.initialSize" defaultValue="10"/>
+        <property name="jdbc.minIdle" defaultValue="10"/>
+        <property name="jdbc.maxIdle" defaultValue="15"/>
+        <property name="jdbc.maxActive" defaultValue="15"/>
+        <property name="jdbc.maxWait" defaultValue="1000"/>
+        <property name="jdbc.testOnBorrow" defaultValue="false"/>
+        <property name="jdbc.testWhileIdle" defaultValue="true"/>
+        <property name="jdbc.timeBetweenEvictionRunsMillis" defaultValue="10000"/>
+        <property name="jdbc.numTestsPerEvictionRun" defaultValue="3"/>
+        <property name="jdbc.minEvictableIdleTimeMillis" defaultValue="300000"/>
+    </group>
+
+    <script>
+        <generate template="META-INF/autoconf/application.properties.vm"
+                  destfile="WEB-INF/classes/application.properties"
+                  outputCharset="UTF-8" charset="UTF-8"/>
+        <generate template="META-INF/autoconf/logback.xml.vm"
+                  destfile="WEB-INF/classes/logback.xml"
+                  outputCharset="UTF-8" charset="UTF-8"/>
+    </script>
+</config>

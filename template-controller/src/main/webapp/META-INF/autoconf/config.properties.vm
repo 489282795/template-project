@@ -1,0 +1,18 @@
+#--------改配置文件只是项目在本地跑的时候会使用到，相关环境的会对应去相应环境读取--------
+
+# 数据库连接配置
+jdbc.driverClassName               = ${jdbc.driverClassName}
+jdbc.url                           = ${jdbc.url}
+jdbc.username                      = ${jdbc.username}
+jdbc.password                      = ${jdbc.password}
+jdbc.initialSize                   = ${jdbc.initialSize}
+jdbc.minIdle                       = ${jdbc.minIdle}
+jdbc.maxIdle                       = ${jdbc.maxIdle}
+jdbc.maxActive                     = ${jdbc.maxActive}
+jdbc.maxWait                       = ${jdbc.maxWait}
+jdbc.testOnBorrow                  = ${jdbc.testOnBorrow}
+jdbc.testWhileIdle                 = ${jdbc.testWhileIdle}
+jdbc.timeBetweenEvictionRunsMillis = ${jdbc.timeBetweenEvictionRunsMillis}
+jdbc.numTestsPerEvictionRun        = ${jdbc.numTestsPerEvictionRun}
+jdbc.minEvictableIdleTimeMillis    = ${jdbc.minEvictableIdleTimeMillis}
+

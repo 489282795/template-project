@@ -1,0 +1,5 @@
+com\cn\template\service\base\BaseService.class
+com\cn\template\service\base\SysUserServiceImpl.class
+com\cn\template\service\base\GlobalExceptionHandler.class
+com\cn\template\service\base\GlobalExceptionHandler$1.class
+com\cn\template\service\base\SystemMenuService.class

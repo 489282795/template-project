@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.template.dao.RolePrivilegeMapper">
+    <resultMap id="rolePrivilege" type="com.cn.template.common.bean.base.RolePrivilegeBean">
+        <id column="ID" property="id"/>
+        <result column="ROLE_ID" property="roleId"/>
+        <result column="MENU_CODE" property="menuCode"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID,ROLE_ID,MENU_CODE
+    </sql>
+
+    <!--获取所有菜单列表-->
+    <select id="getRolePrivilegeListByRoleId" resultMap="rolePrivilege">
+        select
+        *
+        from sys_role_privilege
+        where ROLE_ID = #{roleId}
+        and menu_code in (select menu_code from sys_menu where menu_name like '%${menuType}%')
+    </select>
+
+    <!--删除角色对应的菜单-->
+    <delete id="deleteRolePrivilege">
+        DELETE FROM sys_role_privilege
+        <where>
+            ROLE_ID = #{roleId}
+            and menu_code in (select menu_code from sys_menu where menu_name like '%${menuType}%')
+        </where>
+    </delete>
+
+    <insert id="insertRolePrivilege" parameterType="com.cn.template.common.bean.base.RolePrivilegeBean">
+        INSERT INTO sys_role_privilege
+        (ROLE_ID,MENU_CODE)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.roleId},
+            #{item.menuCode}
+            )
+        </foreach>
+    </insert>
+
+</mapper>

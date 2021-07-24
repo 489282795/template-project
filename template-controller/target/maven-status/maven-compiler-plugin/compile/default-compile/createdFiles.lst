@@ -1,0 +1,6 @@
+com\cn\template\controller\base\SystemMenuController.class
+com\cn\template\controller\startup\ApplicationInitialize.class
+com\cn\template\controller\base\ActiveMQTestController.class
+com\cn\template\controller\startup\ServletInitializer.class
+com\cn\template\controller\startup\ApplicationStartup.class
+com\cn\template\controller\base\SysUserController.class

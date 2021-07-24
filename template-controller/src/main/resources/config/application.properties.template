@@ -1,0 +1,41 @@
+﻿
+#数据库连接配置
+jdbc.driverClassName                = com.mysql.jdbc.Driver
+jdbc.ip                             = DB_SERVICE_IP
+jdbc.port                           = DB_SERVICE_PORT
+jdbc.url                            = jdbc:mysql://${jdbc.ip}:${jdbc.port}/template?useUnicode=true&characterEncoding=utf-8
+jdbc.username                       = DB_SERVICE_ACCOUNT_NAME
+jdbc.password                       = DB_SERVICE_ACCOUNT_PSW
+jdbc.initialSize                    = 10
+jdbc.minIdle                        = 10
+jdbc.maxIdle                        = 15
+jdbc.maxActive                      = 15
+jdbc.maxWait                        = 1000
+jdbc.testOnBorrow                   = false
+jdbc.testWhileIdle                  = true
+jdbc.timeBetweenEvictionRunsMillis  = 10000
+jdbc.numTestsPerEvictionRun         = 3
+jdbc.minEvictableIdleTimeMillis     = 300000
+
+
+#消费者配置
+rabbit.consumer.host         = CONSUMER_MQ_SERVICE_IP
+rabbit.consumer.port         = CONSUMER_MQ_SERVICE_PORT
+rabbit.consumer.username     = CONSUMER_MQ_SERVICE_ACCOUNT_NAME
+rabbit.consumer.password     = CONSUMER_MQ_SERVICE_ACCOUNT_PSW
+rabbit.consumer.vhost        = testhost
+rabbit.consumer.queueName    = q_test
+
+#生产者配置
+rabbit.producer.host         = PRODUCER_MQ_SERVICE_IP
+rabbit.producer.port         = PRODUCER_MQ_SERVICE_PORT
+rabbit.producer.username     = PRODUCER_MQ_SERVICE_ACCOUNT_NAME
+rabbit.producer.password     = PRODUCER_MQ_SERVICE_ACCOUNT_PSW
+rabbit.producer.vhost        = testhost
+rabbit.producer.exchangeName = e_test
+rabbit.producer.routingKey   = r_test
+
+#本地打包测试时需要屏蔽掉，线上部署时放开
+server.port                  = TEMPLATE_PROJECT_SERVICE_PORT
+server.context-path=/templateProject
+
